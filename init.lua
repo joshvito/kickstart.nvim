@@ -90,6 +90,10 @@ vim.opt.shell = '"C:/Program Files/Git/usr/bin/bash.exe"'
 vim.opt.shellcmdflag = '--login -c'
 -- Ensure shell commands quote arguments properly
 vim.opt.shellquote = '"'
+-- tell Neovim to use forward slashes in shell commands
+vim.opt.shellslash = true
+vim.opt.shellxquote = ''
+vim.opt.shellredir = '>%s 2>&1'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -700,7 +704,7 @@ require('lazy').setup({
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -722,9 +726,13 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'lua_ls',
+        'netcoredbg',
+        'ts_ls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      ---@diagnostic disable-next-line: missing-fields
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
