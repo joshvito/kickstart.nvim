@@ -100,6 +100,12 @@ vim.opt.shellredir = '>%s 2>&1'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- word wrap
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = '↪ '
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -691,8 +697,10 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
+        ts_ls = {},
+        terraformls = {},
+        marksman = {},
+        csharp_ls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -727,7 +735,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'lua_ls',
-        'netcoredbg',
+        'csharp_ls',
         'ts_ls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -784,9 +792,11 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
-        --
+        typescript = { 'eslint_d' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        terraform = { 'terraform_fmt' },
+        hcl = { 'hclfmt' },
       },
     },
   },
