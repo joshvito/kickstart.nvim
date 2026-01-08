@@ -95,6 +95,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'netcoredbg',
       },
     }
 
@@ -146,7 +147,7 @@ return {
     }
     dap.adapters.coreclr = {
       type = 'executable',
-      command = '~/AppData/Local/nvim-data/mason/bin/netcoredbg.cmd',
+      command = vim.fn.stdpath('data') .. '/mason/bin/netcoredbg.cmd',
       args = { '--interpreter=vscode' },
     }
     dap.configurations.cs = {

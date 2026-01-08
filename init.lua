@@ -737,6 +737,7 @@ require('lazy').setup({
         'lua_ls',
         'csharp_ls',
         'ts_ls',
+        'marksman',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -919,7 +920,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'red_alert'
+      vim.cmd.colorscheme 'tokyonight-moon' --'red_alert'
     end,
   },
 
