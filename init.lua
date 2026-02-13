@@ -84,16 +84,6 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
--- Set Neovim shell to Git Bash
-vim.opt.shell = '"C:/Program Files/Git/usr/bin/bash.exe"'
--- Pass flags so bash loads as a login + interactive shell
-vim.opt.shellcmdflag = '--login -c'
--- Ensure shell commands quote arguments properly
-vim.opt.shellquote = '"'
--- tell Neovim to use forward slashes in shell commands
-vim.opt.shellslash = true
-vim.opt.shellxquote = ''
-vim.opt.shellredir = '>%s 2>&1'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -199,6 +189,14 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- small terminal via keyboard shortcut
+vim.keymap.set('n', '<leader>st', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 15)
+end)
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -700,7 +698,6 @@ require('lazy').setup({
         ts_ls = {},
         terraformls = {},
         marksman = {},
-        csharp_ls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -735,7 +732,6 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'lua_ls',
-        'csharp_ls',
         'ts_ls',
         'marksman',
       })
