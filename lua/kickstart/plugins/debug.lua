@@ -147,7 +147,7 @@ return {
     }
     dap.adapters.coreclr = {
       type = 'executable',
-      command = vim.fn.stdpath('data') .. '/mason/bin/netcoredbg.cmd',
+      command = vim.fn.stdpath 'data' .. '/mason/bin/netcoredbg.cmd',
       args = { '--interpreter=vscode' },
     }
     dap.configurations.cs = {
